@@ -1,13 +1,22 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Post.css"
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Users } from '../../dummyData';
+import axios from "axios";
 
 export default function Post({ post }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState([]);
+
+  useEffect(()=>{
+    const fetchUser = async () => {
+      const response = await axios.get(`/users/${post.userId}`);
+      setUser(response.data)
+    };
+    fetchUser();
+  },[])
 
   const handleLike = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -19,9 +28,9 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
             <div className="postTopLeft">
-              <img src={PUBLIC_FOLDER + Users.filter((user)=>user.id === post.id)[0].profilePicture} alt="" className="postProfileImg" />
+              <img src={PUBLIC_FOLDER + user.profilePicture} alt="" className="postProfileImg" />
               <span className="postUsername">
-                {Users.filter((user)=>user.id === post.id)[0].username}
+                {user.username}
               </span>
               <span className="postDate">{post.date}</span>
             </div>
