@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Post({ post }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const [like, setLike] = useState(post.like);
+  const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState([]);
 
@@ -28,7 +28,7 @@ export default function Post({ post }) {
       <div className="postWrapper">
         <div className="postTop">
             <div className="postTopLeft">
-              <img src={PUBLIC_FOLDER + user.profilePicture} alt="" className="postProfileImg" />
+              <img src={user.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png"} alt="" className="postProfileImg" />
               <span className="postUsername">
                 {user.username}
               </span>
@@ -40,7 +40,7 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post.desc}</span>
-          <img src={PUBLIC_FOLDER + post.photo} alt="" className="postImg" />
+          <img src={PUBLIC_FOLDER + post.img} alt="" className="postImg" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
