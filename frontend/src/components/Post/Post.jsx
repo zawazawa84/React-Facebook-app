@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import "./Post.css"
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import axios from "axios";
+import { format } from "timeago.js"
 
 export default function Post({ post }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -32,7 +33,7 @@ export default function Post({ post }) {
               <span className="postUsername">
                 {user.username}
               </span>
-              <span className="postDate">{post.date}</span>
+              <span className="postDate">{format(post.createdAt)}</span>
             </div>
             <div className="postTopRight">
             <MoreVertIcon />
