@@ -23,7 +23,7 @@ export default function Profile() {
               <span className="profileInfoDesc">九州大学</span>
             </div>
             <div className="profileRightBottom">
-              <Timeline/>
+              <Timeline username="Aizawa"/>
               <Rightbar profile/>
             </div>
         </div>
