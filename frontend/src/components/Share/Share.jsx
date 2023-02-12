@@ -1,16 +1,32 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import "./Share.css"
 import ImageIcon from '@mui/icons-material/Image';
 import GifIcon from '@mui/icons-material/Gif';
 import FaceIcon from '@mui/icons-material/Face';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 export default function Share() {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const [user, setUser] = useState({})
+  const username = useParams().username
+
+  useEffect(()=>{
+    const fetchUser = async () => {
+      const response = await axios.get(`/users?username=${username}`);
+      setUser(response.data)
+      console.log(response.data)
+    };
+    fetchUser();
+  },[])
+
   return (
     <div className='share'>
       <div className="shareWrapper">
         <div className="shareTop">
-            <img src="/assets/person/1.jpeg" alt="" className='shareProfileImg'/>
+            <img src={user.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png"} alt="" className='shareProfileImg'/>
             <input type="text" className="shareInput" placeholder="今何してるの？"/>
         </div>
         <hr className="shareHr" />
