@@ -4,7 +4,7 @@ import { Users } from '../../dummyData'
 import Online from '../online/Online'
 
 
-export default function Rightbar({profile}) {
+export default function Rightbar({user}) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const HomERightBar = () => {
@@ -62,7 +62,7 @@ export default function Rightbar({profile}) {
   return (
     <div className="rightbar">
       <div className="rightWrapper">
-        {profile ? <ProfileRightBar/> : <HomERightBar/>}
+        {user ? <ProfileRightBar/> : <HomERightBar/>}
       </div>
     </div>
   )
