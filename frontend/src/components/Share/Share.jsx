@@ -20,7 +20,7 @@ export default function Share() {
       console.log(response.data)
     };
     fetchUser();
-  },[])
+  },[username])
 
   return (
     <div className='share'>
